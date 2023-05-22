@@ -5,18 +5,21 @@ use core::{
     arch::asm,
 };
 
+const TK1_MMIO_BASE: u32      = 0xc0000000;
+const TK1_MMIO_TK1_BASE: u32         = TK1_MMIO_BASE | 0x3f000000;
+
 #[repr(u32)]
 enum Mmio {
-    //UartBitRate = 0xc300_0000 | 0x40,
-    //UartDataBits = 0xc300_0000 | 0x44,
-    //UartStopBits = 0xc300_0000 | 0x48,
-    //UartRxStatus = 0xc300_0000 | 0x80,
-    //UartRxData = 0xc300_0000 | 0x84,
-    //UartRxBytes  = 0xc300_0000 | 0x88,
-    UartTxStatus = 0xc300_0000 | 0x100,
-    UartTxData = 0xc300_0000 | 0x104,
+    UartBitRate = TK1_MMIO_TK1_BASE | 0x40,
+    UartDataBits = TK1_MMIO_TK1_BASE | 0x44,
+    UartStopBits = TK1_MMIO_TK1_BASE | 0x48,
+    UartRxStatus = TK1_MMIO_TK1_BASE | 0x80,
+    UartRxData = TK1_MMIO_TK1_BASE | 0x84,
+    UartRxBytes  = TK1_MMIO_TK1_BASE | 0x88,
+    UartTxStatus = TK1_MMIO_TK1_BASE | 0x100,
+    UartTxData = TK1_MMIO_TK1_BASE | 0x104,
 
-    Led = 0xc300_0000 | 0x24,
+    Led = TK1_MMIO_TK1_BASE | 0x24,
 }
 
 fn peek(addr: Mmio) -> u32 {
@@ -45,19 +48,20 @@ fn sleep(cycles: usize) {
 }
 
 const TK1_MMIO_TK1_LED_R_BIT: u32    = 2;
-const   TK1_MMIO_TK1_LED_G_BIT: u32    = 1;
-const   TK1_MMIO_TK1_LED_B_BIT: u32    = 0;
+const TK1_MMIO_TK1_LED_G_BIT: u32    = 1;
+const TK1_MMIO_TK1_LED_B_BIT: u32    = 0;
    
 #[no_mangle]
 extern "C" fn main() -> ! {
     let sleep_time = 100000;
     loop {
-        poke(Mmio::Led, 1 << TK1_MMIO_TK1_LED_R_BIT);
-        sleep(sleep_time);
-        poke(Mmio::Led, 1 << TK1_MMIO_TK1_LED_G_BIT);
-        sleep(sleep_time);
-        poke(Mmio::Led, 1 << TK1_MMIO_TK1_LED_B_BIT);
-        sleep(sleep_time);
+        tx(b"Hello, world!\n");
+        //poke(Mmio::Led, 1 << TK1_MMIO_TK1_LED_R_BIT);
+        //sleep(sleep_time);
+        //poke(Mmio::Led, 1 << TK1_MMIO_TK1_LED_G_BIT);
+        //sleep(sleep_time);
+        //poke(Mmio::Led, 1 << TK1_MMIO_TK1_LED_B_BIT);
+        //sleep(sleep_time);
     }
 }
 
