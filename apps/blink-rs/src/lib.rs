@@ -7,17 +7,18 @@ use core::{
 
 const TK1_MMIO_BASE: u32      = 0xc0000000;
 const TK1_MMIO_TK1_BASE: u32         = TK1_MMIO_BASE | 0x3f000000;
+const TK1_MMIO_UART_BASE: u32        = TK1_MMIO_BASE | 0x03000000;
 
 #[repr(u32)]
 enum Mmio {
-    UartBitRate = TK1_MMIO_TK1_BASE | 0x40,
-    UartDataBits = TK1_MMIO_TK1_BASE | 0x44,
-    UartStopBits = TK1_MMIO_TK1_BASE | 0x48,
-    UartRxStatus = TK1_MMIO_TK1_BASE | 0x80,
-    UartRxData = TK1_MMIO_TK1_BASE | 0x84,
-    UartRxBytes  = TK1_MMIO_TK1_BASE | 0x88,
-    UartTxStatus = TK1_MMIO_TK1_BASE | 0x100,
-    UartTxData = TK1_MMIO_TK1_BASE | 0x104,
+    UartBitRate = TK1_MMIO_UART_BASE | 0x40,
+    UartDataBits = TK1_MMIO_UART_BASE | 0x44,
+    UartStopBits = TK1_MMIO_UART_BASE | 0x48,
+    UartRxStatus = TK1_MMIO_UART_BASE | 0x80,
+    UartRxData = TK1_MMIO_UART_BASE | 0x84,
+    UartRxBytes  = TK1_MMIO_UART_BASE | 0x88,
+    UartTxStatus = TK1_MMIO_UART_BASE | 0x100,
+    UartTxData = TK1_MMIO_UART_BASE | 0x104,
 
     Led = TK1_MMIO_TK1_BASE | 0x24,
 }
