@@ -3,7 +3,7 @@ OBJCOPY ?= llvm-objcopy
 P := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 LIBDIR ?= $(P)/../../tkey-libs
 
-CC = clang
+CC ?= clang
 
 INCLUDE=$(LIBDIR)/include
 
