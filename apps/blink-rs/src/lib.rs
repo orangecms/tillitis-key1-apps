@@ -1,4 +1,6 @@
 #![no_std]
+#![no_main]
+#![feature(start)]
 
 use core::{
     panic::PanicInfo,
@@ -53,7 +55,8 @@ const TK1_MMIO_TK1_LED_G_BIT: u32    = 1;
 const TK1_MMIO_TK1_LED_B_BIT: u32    = 0;
    
 #[no_mangle]
-extern "C" fn main() -> ! {
+#[start]
+pub extern "C" fn main() -> ! {
     let sleep_time = 100000;
     loop {
         tx(b"Hello, world!\n");
@@ -67,6 +70,6 @@ extern "C" fn main() -> ! {
 }
 
 #[panic_handler]
-fn panic(_info: &PanicInfo) -> ! {
+pub fn panic(_info: &PanicInfo) -> ! {
     loop {}
 }

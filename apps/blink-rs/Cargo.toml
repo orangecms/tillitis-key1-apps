@@ -3,11 +3,13 @@ name = "blink-rs"
 version = "0.1.0"
 edition = "2021"
 
-[dependencies]
-libc = "0.2.0"
-
 [lib]
 name       = "app"
 test       = false
 bench      = false
-crate-type = ["staticlib"]
+crate-type = ["bin"]
+
+[dependencies.k256]
+version = "0.13.1"
+default-features = false
+features = ["ecdsa"]
