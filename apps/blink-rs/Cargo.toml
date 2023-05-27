@@ -9,6 +9,9 @@ test       = false
 bench      = false
 crate-type = ["bin"]
 
+[dependencies]
+bumpalo = "3.13.0"
+
 [dependencies.k256]
 version = "0.13.1"
 default-features = false
